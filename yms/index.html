@@ -64,7 +64,7 @@
         var path = window.location.pathname;
         path = path.substr(0, path.lastIndexOf("/"));
         if(path.lastIndexOf("/") > 0 ) path = path.substr(0, path.lastIndexOf("/"));
-        console.log(path);
+        console.log(window.location.pathname, path);
         
         //헤더 페이지 삽입 : JQuery 사용
         $("#header_div").load(path + "/header.html", function(){
