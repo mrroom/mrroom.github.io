@@ -116,22 +116,12 @@
                         </ul>
                         -->
                         <ul class="side-menu">
-                            <li>
-                                <a><span class="fa fa-chevron-down"></span>메뉴1</a>
+                            <li class="node_temp">
+                                <a><span class="fa fa-chevron-down"></span><span class="node_text">메뉴1</span></a>
                                 <ul class="child_menu">
-                                    <li><a href="#level1_1">Level One</a></li>
-                                    <li>
-                                        <a><span class="fa fa-chevron-down"></span>Level One</a>
-                                        <ul class="child_menu">
-                                            <li><a href="level2.html">Level Two</a></li>
-                                            <li><a href="#level2_1">Level Two</a></li>
-                                            <li><a href="#level2_2">Level Two</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="#level1_2">Level One</a></li>
                                 </ul>
                             </li>
-                            <li><a href="#level0_1">메뉴2</a></li>
+                            <li class="node_temp"><a href="#level0_1"><span class="node_text">메뉴2</span></a></li>
                         </ul>
                     </div>
                 </aside>
@@ -161,7 +151,7 @@
         load_side_menu();
 
         //사이드 트리 메뉴 로드 및 바인딩
-        //load_side_tree_menu();
+        load_side_tree_menu();
 
         //마크다운 파일 로드
         load_markdown("/doc/intro.md");
@@ -253,8 +243,27 @@
             var filter_data = get_filter_data(data, "parent_code", "");
             console.log("filter_data2 : ", filter_data);
 
+
+            var new_menu1 = $(".side-menu li").eq(0).clone().appendTo(".side-menu");
+            var new_menu2 = $(".side-menu li").eq(1).clone().appendTo(".side-menu");
+
+            new_menu1.addClass("node_multi");
+            new_menu2.addClass("node_single");
+            new_menu1.removeClass("node_temp");
+            new_menu2.removeClass("node_temp");
+
+            $(".side-menu").find(".node_temp").remove();
+
+            new_menu1.find("span.node_text").text("메뉴11");
+            new_menu2.find("span.node_text").text("메뉴22");
+
             $.each(data, function(index, item) {
-                var new_menu = $("side-menu li").first().clone().appendTo(".side-menu");
+                //var new_menu1 = $("side-menu li").first().clone().appendTo(".side-menu");
+                //var new_menu2 = $("side-menu li").second().clone().appendTo(".side-menu");
+
+                //console.log(new_menu1, new_menu2);
+
+                /*
                 new_menu.attr("code", item.code);
                 new_menu.children("a").first().attr("href", path + item.url);
                 new_menu.children("a").first().text(item.text);
@@ -264,9 +273,9 @@
                 if(path + item.url == window.location.pathname){
                     new_menu.addClass("active");
                 }
-            });
+                */
 
-            
+            });
 
         });
     }
