@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light text-black bg-light sticky-top">
+<nav class="navbar navbar-expand-lg navbar-light fixed-top text-black bg-light">
     <a class="navbar-brand" href="#">
         <img src="https://avatars2.githubusercontent.com/u/1829186?s=460&u=9ebbabb4ebc8f4155d1ff63f92a6c70177523317&v=4" width="30" height="30" class="rounded-circle" alt="">
     </a>
@@ -35,6 +35,11 @@
 
 <!-- Custom styles for this template -->
 <style>
+    body {
+        min-height: 75rem;
+        padding-top: 4.5rem;
+    }
+
     #header_div {
         width: 100%;
         padding-right: 0px;
@@ -43,9 +48,14 @@
         margin-left: auto;
     }
 
+    #header_div nav {
+        border-bottom: 0.1px solid lightgrey;
+    }
+
     #body_div {
         min-height: 800px;
     }
+
 </style>
 
 <script>
