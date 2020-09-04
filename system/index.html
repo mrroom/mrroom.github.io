@@ -19,6 +19,41 @@
     <link rel="icon" href="https://avatars2.githubusercontent.com/u/1829186?s=460&u=9ebbabb4ebc8f4155d1ff63f92a6c70177523317&v=4" sizes="32x32" type="image/png">
     <!--<link href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.10.0/github-markdown.css" rel="stylesheet" />-->
     <link rel="stylesheet" href="./css/github2.css" />
+    <!--<link rel="stylesheet" href="./css/custom.css" />-->
+
+    <!-- Custom styles for this template -->
+    <style>
+        
+        .side_menu {
+            border-left: 0.5px dotted lightgrey;
+            border-right: 0.5px dotted lightgrey;
+        }
+
+        .child_menu {
+            display: none; 
+        }
+
+        .side_menu span.fa {
+            float: right;
+            text-align: center;
+            margin-top: 5px;
+            font-size: 10px;
+        }
+
+        .side_menu ul {
+            list-style:none;
+            padding-inline-start: 20px;
+        }
+
+        .side_menu ul li {
+            line-height: 30px;
+        }
+
+        .side_menu a {
+            color: black;
+        }
+
+    </style>
 
 </head>
 
@@ -32,13 +67,73 @@
         <!--main-->
         <main class="container-fluid" id="body_div">
             <div class="row">
-                <div class="col-md-9">
-                    <span>home main</span>
-                    <div class="col-sm-10 py-md-3 pl-md-5 bd-content github" id="md_content"></div>
+                <div class="col-md-10">
+                    <h3>home main</h3>
+                    <div class="py-md-3 pl-md-5 bd-content github" id="md_content"></div>
                 </div>
 
-                <aside class="col-md-3">
-                    <span>side</span>
+                <aside id="sidebar-menu" class="col-md-2 side_menu">
+                    <div class="menu_section">
+                        <h3>목차</h3>
+                        <!-- 
+                        <ul class="side-menu">
+                            <li>
+                                <a><i class="fa fa-sitemap"></i> 메뉴1 <span class="fa fa-chevron-down"></span></a>
+                                <ul class="child_menu">
+                                    <li><a href="#level1_1">Level One</a>
+                                    <li><a>Level One<span class="fa fa-chevron-down"></span></a>
+                                    <ul class="child_menu">
+                                        <li><a href="level2.html">Level Two</a>
+                                        </li>
+                                        <li><a href="#level2_1">Level Two</a>
+                                        </li>
+                                        <li><a href="#level2_2">Level Two</a>
+                                        </li>
+                                    </ul>
+                                    </li>
+                                    <li><a href="#level1_2">Level One</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a><i class="fa fa-sitemap"></i> 메뉴2 <span class="fa fa-chevron-down"></span></a>
+                                <ul class="child_menu">
+                                    <li><a href="#level1_1">Level One</a>
+                                    <li><a>Level One<span class="fa fa-chevron-down"></span></a>
+                                    <ul class="child_menu">
+                                        <li><a href="level2.html">Level Two</a>
+                                        </li>
+                                        <li><a href="#level2_1">Level Two</a>
+                                        </li>
+                                        <li><a href="#level2_2">Level Two</a>
+                                        </li>
+                                    </ul>
+                                    </li>
+                                    <li><a href="#level1_2">Level One</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                        -->
+                        <ul class="side-menu">
+                            <li>
+                                <a><span class="fa fa-chevron-down"></span>메뉴1</a>
+                                <ul class="child_menu">
+                                    <li><a href="#level1_1">Level One</a></li>
+                                    <li>
+                                        <a><span class="fa fa-chevron-down"></span>Level One</a>
+                                        <ul class="child_menu">
+                                            <li><a href="level2.html">Level Two</a></li>
+                                            <li><a href="#level2_1">Level Two</a></li>
+                                            <li><a href="#level2_2">Level Two</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="#level1_2">Level One</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#level0_1">메뉴2</a></li>
+                        </ul>
+                    </div>
                 </aside>
             </div><!-- /.row -->
         </main>
@@ -54,6 +149,7 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="https://unpkg.com/showdown/dist/showdown.min.js"></script>
+<!--<script src="./js/custom.js"></script>-->
 <script>
 
     $(function() {
@@ -61,10 +157,19 @@
         //헤더 & 풋터 페이지 삽입
         load_header_footer();
 
+        //사이드 메뉴 로드
+        load_side_menu();
+
+        //사이드 트리 메뉴 로드 및 바인딩
+        //load_side_tree_menu();
+
+        //마크다운 파일 로드
         load_markdown("/doc/intro.md");
+
 
     });
 
+    //헤더 & 풋터 페이지 삽입
     var load_header_footer = function(){
 
         var path = window.location.pathname;
@@ -106,6 +211,66 @@
 
         if(callback) callback();
     }
+
+    //사이드 메뉴 로드
+    var load_side_menu = function() {
+
+        //기본은 열려져 있게 세팅
+        $("#sidebar-menu").find('li ul').slideDown();
+
+        //클릭시 트리메뉴 열리고 닫기
+        $("#sidebar-menu").find("a").click(function(){
+            $(this).next("ul").slideToggle("fast");
+        });
+
+    }
+
+    //column 데이터를 array로 가져온다
+    var get_filter_data = function(data, filter_column, filter_value) {
+
+        //console.log(filter_column, filter_value)
+        var filter_data = data.filter(function(object) {
+            return object[filter_column]===filter_value;
+        });
+
+        console.log("filter_data1 : ", filter_data);
+
+        return filter_data;
+
+    }
+
+    //사이드 트리 메뉴 로드 및 바인딩
+    var load_side_tree_menu = function(){
+
+        var path = window.location.pathname;
+        path = path.substr(0, path.lastIndexOf("/"));
+        if(path.lastIndexOf("/") > 0 ) path = path.substr(0, path.lastIndexOf("/"));
+        
+        $.getJSON(path + "/contents.json", function(data) {
+
+            var items = [];
+
+            var filter_data = get_filter_data(data, "parent_code", "");
+            console.log("filter_data2 : ", filter_data);
+
+            $.each(data, function(index, item) {
+                var new_menu = $("side-menu li").first().clone().appendTo(".side-menu");
+                new_menu.attr("code", item.code);
+                new_menu.children("a").first().attr("href", path + item.url);
+                new_menu.children("a").first().text(item.text);
+                new_menu.removeClass("active");
+
+                //window.location.pathname와 path + url이 일치시는 메뉴 활성화
+                if(path + item.url == window.location.pathname){
+                    new_menu.addClass("active");
+                }
+            });
+
+            
+
+        });
+    }
+
 
 </script>
 </html>
