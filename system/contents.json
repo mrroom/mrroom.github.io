@@ -1,0 +1,11 @@
+[
+    {"code":"01", "parent_code":"", "text":"YMS", "page":""},
+    {"code":"02", "parent_code":"", "text":"SPC", "page":""},
+    {"code":"03", "parent_code":"", "text":"ETC", "page":"/doc/etc/intro.md"},
+    {"code":"01-01", "parent_code":"01", "text":"YMS Intro", "page":"/doc/yms/intro.md"},
+    {"code":"01-02", "parent_code":"01", "text":"YMS Server", "page":"/doc/yms/server.md"},
+    {"code":"01-03", "parent_code":"01", "text":"YMS Client", "page":"/doc/yms/client.md"},
+    {"code":"02-01", "parent_code":"02", "text":"SPC Intro", "page":"/doc/spc/Intro.md"},
+    {"code":"02-02", "parent_code":"02", "text":"SPC Server", "page":"/doc/spc/server.md"},
+    {"code":"02-03", "parent_code":"02", "text":"SPC Client", "page":"/doc/spc/client.md"}
+]
