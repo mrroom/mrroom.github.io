@@ -53,6 +53,10 @@
             color: black;
         }
 
+        .content-arrow-right {
+            display: none; 
+        }
+
     </style>
 
 </head>
@@ -67,64 +71,29 @@
         <!--main-->
         <main class="container-fluid" id="body_div">
             <div class="row">
-                <div class="col-md-10">
-                    <h3>home main</h3>
-                    <div class="py-md-3 pl-md-5 bd-content github" id="md_content"></div>
-                </div>
 
                 <aside id="sidebar-menu" class="col-md-2 side_menu">
+                    <div class="text-right pb-3 content-arrow-left"><i class="fa fa-arrow-left"></i></div>
                     <div class="menu_section">
-                        <h3>목차</h3>
-                        <!-- 
-                        <ul class="side-menu">
-                            <li>
-                                <a><i class="fa fa-sitemap"></i> 메뉴1 <span class="fa fa-chevron-down"></span></a>
-                                <ul class="child_menu">
-                                    <li><a href="#level1_1">Level One</a>
-                                    <li><a>Level One<span class="fa fa-chevron-down"></span></a>
-                                    <ul class="child_menu">
-                                        <li><a href="level2.html">Level Two</a>
-                                        </li>
-                                        <li><a href="#level2_1">Level Two</a>
-                                        </li>
-                                        <li><a href="#level2_2">Level Two</a>
-                                        </li>
-                                    </ul>
-                                    </li>
-                                    <li><a href="#level1_2">Level One</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a><i class="fa fa-sitemap"></i> 메뉴2 <span class="fa fa-chevron-down"></span></a>
-                                <ul class="child_menu">
-                                    <li><a href="#level1_1">Level One</a>
-                                    <li><a>Level One<span class="fa fa-chevron-down"></span></a>
-                                    <ul class="child_menu">
-                                        <li><a href="level2.html">Level Two</a>
-                                        </li>
-                                        <li><a href="#level2_1">Level Two</a>
-                                        </li>
-                                        <li><a href="#level2_2">Level Two</a>
-                                        </li>
-                                    </ul>
-                                    </li>
-                                    <li><a href="#level1_2">Level One</a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                        -->
                         <ul class="side-menu">
                             <li class="node_temp">
-                                <a><span class="fa fa-chevron-down"></span><span class="node_text">메뉴1</span></a>
-                                <ul class="child_menu">
+                                <a href="#"><span class="fa fa-chevron-down"></span><span class="node_text"></span></a>
+                                <ul class="child-menu">
                                 </ul>
                             </li>
-                            <li class="node_temp"><a href="#level0_1"><span class="node_text">메뉴2</span></a></li>
+                            <li class="node_temp"><a href="#" class="node_page"><span class="node_text"></span></a></li>
                         </ul>
                     </div>
                 </aside>
+
+                <div class="col-md-10" id="main_content">
+                    <div class="pb-3 content-arrow-right">
+                        <i class="fa fa-arrow-right"></i>
+                    </div>
+                    <h3 id="main_title"></h3>
+                    <div class="py-md-3 pl-md-5 bd-content github" id="md_content"></div>
+                </div>
+
             </div><!-- /.row -->
         </main>
 
@@ -147,15 +116,30 @@
         //헤더 & 풋터 페이지 삽입
         load_header_footer();
 
-        //사이드 메뉴 로드
-        load_side_menu();
-
         //사이드 트리 메뉴 로드 및 바인딩
         load_side_tree_menu();
 
         //마크다운 파일 로드
-        load_markdown("/doc/intro.md");
+        //load_markdown("/doc/intro.md");
+        load_markdown_url("https://raw.githubusercontent.com/mrroom/MDM-MES-SPC-EES-YMS/master/readme.md");
+        $("#main_title").text("MDM, MES, SPC, EES, YMS");
+        
 
+        $(".content-arrow-left").click(function(event){
+            $("#sidebar-menu").slideToggle("fast");
+            $(".content-arrow-left").slideToggle("fast");
+            $(".content-arrow-right").slideToggle("fast");
+            $("#main_content").removeClass("col-md-10");
+            $("#main_content").addClass("col-md-12");
+        });
+
+        $(".content-arrow-right").click(function(event){
+            $("#sidebar-menu").slideToggle("fast");
+            $(".content-arrow-right").slideToggle("fast");
+            $(".content-arrow-left").slideToggle("fast");
+            $("#main_content").removeClass("col-md-12");
+            $("#main_content").addClass("col-md-10");
+        });
 
     });
 
@@ -165,7 +149,6 @@
         var path = window.location.pathname;
         path = path.substr(0, path.lastIndexOf("/"));
         if(path.lastIndexOf("/") > 0 ) path = path.substr(0, path.lastIndexOf("/"));
-        console.log(window.location.pathname, path);
 
         //헤더 페이지 삽입 : JQuery 사용
         $("#header_div").load(path + "/header.html", function(){
@@ -185,9 +168,15 @@
         var path = window.location.pathname;
         path = path.substr(0, path.lastIndexOf("/"));
         if(path.lastIndexOf("/") > 0 ) path = path.substr(0, path.lastIndexOf("/"));
-        console.log("path : ", path);
 
         $.get(path + file, function(data) {
+            convert_html(data);
+        },"text");
+    }
+
+    var load_markdown_url = function(url) {
+
+        $.get(url, function(data) {
             convert_html(data);
         },"text");
     }
@@ -210,22 +199,64 @@
 
         //클릭시 트리메뉴 열리고 닫기
         $("#sidebar-menu").find("a").click(function(){
+
+            console.log("click!");
             $(this).next("ul").slideToggle("fast");
         });
 
     }
 
     //column 데이터를 array로 가져온다
-    var get_filter_data = function(data, filter_column, filter_value) {
+    var get_filter_data = function(data, parent_column, filter_value, child_column, child_flag_column) {
 
-        //console.log(filter_column, filter_value)
+        var filter_data = data.filter(function(object) {
+            return object[parent_column]===filter_value;
+        });
+
+        return filter_data;
+
+    }
+
+    //자식의 존재여부 체크
+    var has_child_data = function(data, filter_column, filter_value) {
+
+        var result = false;
+
         var filter_data = data.filter(function(object) {
             return object[filter_column]===filter_value;
         });
 
-        console.log("filter_data1 : ", filter_data);
+        if(filter_data.length > 0) result = true;
 
-        return filter_data;
+        return result;
+    }
+
+    var set_tree_node = function(data, parent_node, multi_node, single_node, parent_code) {
+
+        //부모코드 값으로 필터
+        var filter_data = get_filter_data(data, "parent_code", parent_code, "code", "has_child");
+
+        filter_data.forEach(function(item){
+
+            var new_node = single_node.clone();
+            var has_child = item["has_child"];
+            var code = item["code"];
+            var text = item["text"];
+            var page = item["page"];
+
+            if(has_child) {
+                new_node = multi_node.clone();
+
+                var parent_child_node = new_node.find("ul").first();
+                set_tree_node(data, parent_child_node, multi_node, single_node, code);
+
+            }
+
+            new_node.attr("code",code);
+            new_node.children().find("span.node_text").first().text(text);
+            new_node.find("a").first().attr("page", page);
+            new_node.appendTo(parent_node);
+        });
 
     }
 
@@ -236,48 +267,52 @@
         path = path.substr(0, path.lastIndexOf("/"));
         if(path.lastIndexOf("/") > 0 ) path = path.substr(0, path.lastIndexOf("/"));
         
+        //contents.json 로드 및 바인딩
         $.getJSON(path + "/contents.json", function(data) {
 
-            var items = [];
+            //자식의 존재여부 칼럼 추가
+            for (n = 0; n < data.length; n++) {
+                var has_child = has_child_data(data, "parent_code", data[n]["code"]);
+                data[n]["has_child"] = has_child;
+            }
 
-            var filter_data = get_filter_data(data, "parent_code", "");
-            console.log("filter_data2 : ", filter_data);
+            //최상위 노드(ul)
+            var parent_node = $(".menu_section ul").first();
+            //다중 노드(li)
+            var multi_node = parent_node.children().eq(0).clone();
+            //단일 노드(li)
+            var single_node = parent_node.children().eq(1).clone();
 
-
-            var new_menu1 = $(".side-menu li").eq(0).clone().appendTo(".side-menu");
-            var new_menu2 = $(".side-menu li").eq(1).clone().appendTo(".side-menu");
-
-            new_menu1.addClass("node_multi");
-            new_menu2.addClass("node_single");
-            new_menu1.removeClass("node_temp");
-            new_menu2.removeClass("node_temp");
+            //
+            multi_node.addClass("node_multi");
+            single_node.addClass("node_single");
+            multi_node.removeClass("node_temp");
+            single_node.removeClass("node_temp");
 
             $(".side-menu").find(".node_temp").remove();
 
-            new_menu1.find("span.node_text").text("메뉴11");
-            new_menu2.find("span.node_text").text("메뉴22");
+            var parent_code = "";
 
-            $.each(data, function(index, item) {
-                //var new_menu1 = $("side-menu li").first().clone().appendTo(".side-menu");
-                //var new_menu2 = $("side-menu li").second().clone().appendTo(".side-menu");
+            set_tree_node(data, parent_node, multi_node, single_node, parent_code);
 
-                //console.log(new_menu1, new_menu2);
+            //기본은 열려져 있게 세팅
+            $("#sidebar-menu").find("li ul").slideDown(); //.slideUp()
 
-                /*
-                new_menu.attr("code", item.code);
-                new_menu.children("a").first().attr("href", path + item.url);
-                new_menu.children("a").first().text(item.text);
-                new_menu.removeClass("active");
+            //클릭시 트리메뉴 열리고 닫기
+            $("#sidebar-menu").find("a").click(function(event){
+                $(this).next("ul").slideToggle("fast");
 
-                //window.location.pathname와 path + url이 일치시는 메뉴 활성화
-                if(path + item.url == window.location.pathname){
-                    new_menu.addClass("active");
+                var page =$(this).attr("page");
+                if(page != ""){
+                    load_markdown_url(page);
+                    $("#main_title").text($(this).find("span.node_text").first().text());
                 }
-                */
-
+                
             });
 
         });
+
+        
     }
 
 
