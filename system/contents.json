@@ -3,7 +3,7 @@
     {"code":"02", "parent_code":"", "text":"YMS", "page":""},
     {"code":"03", "parent_code":"", "text":"SPC", "page":""},
     {"code":"04", "parent_code":"", "text":"통계", "page":""},
-    {"code":"05", "parent_code":"", "text":"머신런닝", "page":""},
+    {"code":"05", "parent_code":"", "text":"머신러닝", "page":""},
     {"code":"06", "parent_code":"", "text":"ETC", "page":""},
     {"code":"01-01", "parent_code":"01", "text":"MDM, MES, SPC, EES, YMS", "page":"https://raw.githubusercontent.com/mrroom/MDM-MES-SPC-EES-YMS/master/readme.md"},
     {"code":"02-01", "parent_code":"02", "text":"YMS Intro", "page":""},
