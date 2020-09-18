@@ -19,4 +19,5 @@
     {"code":"04-02", "parent_code":"04", "text":"MNIST", "page":"https://raw.githubusercontent.com/mrroom/Bigdata-Deep-Learning/master/mnist.md"},
     {"code":"05-01-01", "parent_code":"05-01", "text":"신경망 소개", "page":"https://raw.githubusercontent.com/mrroom/Bigdata-Deep-Learning/master/그로킹%20딥러닝-신경망%20소개.md"},
     {"code":"05-01-02", "parent_code":"05-01", "text":"경사하강법", "page":"https://raw.githubusercontent.com/mrroom/Bigdata-Deep-Learning/master/%EA%B2%BD%EC%82%AC%ED%95%98%EA%B0%95%EB%B2%95.md"}
+    {"code":"05-01-02", "parent_code":"05-01", "text":"Machine Learning with Python(허민석)", "page":"https://github.com/minsuk-heo/machinelearning/blob/master/jupyter/Jupyter%20Tutorial.ipynb"}
 ]
