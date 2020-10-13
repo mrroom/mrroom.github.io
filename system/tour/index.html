@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Mr.Rooom System</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" >
+    <meta name="theme-color" content="#563d7c">
+
+    <!-- Font Awesome -->
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- Favicons -->
+    <link rel="icon" href="https://avatars2.githubusercontent.com/u/1829186?s=460&u=9ebbabb4ebc8f4155d1ff63f92a6c70177523317&v=4" sizes="32x32" type="image/png">
+    <!--<link href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.10.0/github-markdown.css" rel="stylesheet" />-->
+    <link rel="stylesheet" href="./css/github2.css" />
+    <!--<link rel="stylesheet" href="./css/custom.css" />-->
+
+    <!-- Custom styles for this template -->
+    <style>
+        
+        .side_menu {
+            border-left: 0.5px dotted lightgrey;
+            border-right: 0.5px dotted lightgrey;
+        }
+
+        .child_menu {
+            display: none; 
+        }
+
+        .side_menu span.fa {
+            float: right;
+            text-align: center;
+            margin-top: 5px;
+            font-size: 10px;
+        }
+
+        .side_menu ul {
+            list-style:none;
+            padding-inline-start: 20px;
+        }
+
+        .side_menu ul li {
+            line-height: 30px;
+        }
+
+        .side_menu a {
+            color: black;
+        }
+
+        .content-arrow-right {
+            display: none; 
+        }
+
+    </style>
+
+</head>
+
+<body id="body" >
+    <div id="app">
+
+        <!--hader-->
+        <header class="container-fluid header" id="header_div">
+        </header>
+
+        <!--main-->
+        <main class="container-fluid" id="body_div">
+            <div class="row">
+
+                <aside id="sidebar-menu" class="col-md-2 side_menu">
+                    <div class="text-right pb-3 content-arrow-left"><i class="fa fa-arrow-left"></i></div>
+                    <div class="menu_section">
+                        <ul class="side-menu">
+                            <li class="node_temp">
+                                <a href="#"><span class="fa fa-chevron-down"></span><span class="node_text"></span></a>
+                                <ul class="child-menu">
+                                </ul>
+                            </li>
+                            <li class="node_temp"><a href="#" class="node_page"><span class="node_text"></span></a></li>
+                        </ul>
+                    </div>
+                </aside>
+
+                <div class="col-md-10" id="main_content">
+                    <div class="pb-3 content-arrow-right">
+                        <i class="fa fa-arrow-right"></i>
+                    </div>
+                    <h3 id="main_title"></h3>
+                    <div class="py-md-3 pl-md-5 bd-content github" id="md_content"></div>
+                </div>
+
+            </div><!-- /.row -->
+        </main>
+
+        <!--footer-->
+        <footer class="container-fluid" id="footer_div">
+        </footer>
+
+    </div>
+</body>
+<!--script-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://unpkg.com/showdown/dist/showdown.min.js"></script>
+<!--<script src="./js/custom.js"></script>-->
+<script>
+
+    $(function() {
+        
+        //헤더 & 풋터 페이지 삽입
+        load_header_footer();
+
+        //사이드 트리 메뉴 로드 및 바인딩
+        load_side_tree_menu();
+
+        //마크다운 파일 로드
+        //load_markdown("/doc/intro.md");
+        load_markdown_url("https://raw.githubusercontent.com/mrroom/MDM-MES-SPC-EES-YMS/master/readme.md");
+        $("#main_title").text("MDM, MES, SPC, EES, YMS");
+        
+
+        $(".content-arrow-left").click(function(event){
+            $("#sidebar-menu").slideToggle("fast");
+            $(".content-arrow-left").slideToggle("fast");
+            $(".content-arrow-right").slideToggle("fast");
+            $("#main_content").removeClass("col-md-10");
+            $("#main_content").addClass("col-md-12");
+        });
+
+        $(".content-arrow-right").click(function(event){
+            $("#sidebar-menu").slideToggle("fast");
+            $(".content-arrow-right").slideToggle("fast");
+            $(".content-arrow-left").slideToggle("fast");
+            $("#main_content").removeClass("col-md-12");
+            $("#main_content").addClass("col-md-10");
+        });
+
+    });
+
+    //헤더 & 풋터 페이지 삽입
+    var load_header_footer = function(){
+
+        var path = window.location.pathname;
+        path = path.substr(0, path.lastIndexOf("/"));
+        if(path.lastIndexOf("/") > 0 ) path = path.substr(0, path.lastIndexOf("/"));
+
+        //헤더 페이지 삽입 : JQuery 사용
+        $("#header_div").load(path + "/header.html", function(){
+            //페이지 삽입 후 Header객체 처리
+            //첫페이지 메뉴 active 처리
+            //Header.menu_id ="index";
+        });
+
+        //풋터 페이지 삽입 : JQuery 사용
+        $("#footer_div").load(path + "/footer.html" );
+        
+    }
+
+    //마크다운 파일 로드
+    var load_markdown = function(file) {
+
+        var path = window.location.pathname;
+        path = path.substr(0, path.lastIndexOf("/"));
+        if(path.lastIndexOf("/") > 0 ) path = path.substr(0, path.lastIndexOf("/"));
+
+        $.get(path + file, function(data) {
+            convert_html(data);
+        },"text");
+    }
+
+    var load_markdown_url = function(url) {
+
+        $.get(url, function(data) {
+            convert_html(data);
+        },"text");
+    }
+
+    //마크다운을 HTML로 변환
+    var convert_html = function(data, callback) {
+
+         var converter = new showdown.Converter({disableForced4SpacesIndentedSublists : true});
+        converter.setFlavor("github");
+        $("#md_content").html(converter.makeHtml(data));
+
+        if(callback) callback();
+    }
+
+    //사이드 메뉴 로드
+    var load_side_menu = function() {
+
+        //기본은 열려져 있게 세팅
+        $("#sidebar-menu").find('li ul').slideDown();
+
+        //클릭시 트리메뉴 열리고 닫기
+        $("#sidebar-menu").find("a").click(function(){
+
+            console.log("click!");
+            $(this).next("ul").slideToggle("fast");
+        });
+
+    }
+
+    //column 데이터를 array로 가져온다
+    var get_filter_data = function(data, parent_column, filter_value, child_column, child_flag_column) {
+
+        var filter_data = data.filter(function(object) {
+            return object[parent_column]===filter_value;
+        });
+
+        return filter_data;
+
+    }
+
+    //자식의 존재여부 체크
+    var has_child_data = function(data, filter_column, filter_value) {
+
+        var result = false;
+
+        var filter_data = data.filter(function(object) {
+            return object[filter_column]===filter_value;
+        });
+
+        if(filter_data.length > 0) result = true;
+
+        return result;
+    }
+
+    var set_tree_node = function(data, parent_node, multi_node, single_node, parent_code) {
+
+        //부모코드 값으로 필터
+        var filter_data = get_filter_data(data, "parent_code", parent_code, "code", "has_child");
+
+        filter_data.forEach(function(item){
+
+            var new_node = single_node.clone();
+            var has_child = item["has_child"];
+            var code = item["code"];
+            var text = item["text"];
+            var page = item["page"];
+
+            if(has_child) {
+                new_node = multi_node.clone();
+
+                var parent_child_node = new_node.find("ul").first();
+                set_tree_node(data, parent_child_node, multi_node, single_node, code);
+
+            }
+
+            new_node.attr("code",code);
+            new_node.children().find("span.node_text").first().text(text);
+            new_node.find("a").first().attr("page", page);
+            new_node.appendTo(parent_node);
+        });
+
+    }
+
+    //사이드 트리 메뉴 로드 및 바인딩
+    var load_side_tree_menu = function(){
+
+        var path = window.location.pathname;
+        path = path.substr(0, path.lastIndexOf("/"));
+        if(path.lastIndexOf("/") > 0 ) path = path.substr(0, path.lastIndexOf("/"));
+        
+        //contents.json 로드 및 바인딩
+        $.getJSON(path + "/contents.json", function(data) {
+
+            //자식의 존재여부 칼럼 추가
+            for (n = 0; n < data.length; n++) {
+                var has_child = has_child_data(data, "parent_code", data[n]["code"]);
+                data[n]["has_child"] = has_child;
+            }
+
+            //최상위 노드(ul)
+            var parent_node = $(".menu_section ul").first();
+            //다중 노드(li)
+            var multi_node = parent_node.children().eq(0).clone();
+            //단일 노드(li)
+            var single_node = parent_node.children().eq(1).clone();
+
+            //
+            multi_node.addClass("node_multi");
+            single_node.addClass("node_single");
+            multi_node.removeClass("node_temp");
+            single_node.removeClass("node_temp");
+
+            $(".side-menu").find(".node_temp").remove();
+
+            var parent_code = "";
+
+            set_tree_node(data, parent_node, multi_node, single_node, parent_code);
+
+            //기본은 열려져 있게 세팅
+            $("#sidebar-menu").find("li ul").slideDown(); //.slideUp()
+
+            //클릭시 트리메뉴 열리고 닫기
+            $("#sidebar-menu").find("a").click(function(event){
+                $(this).next("ul").slideToggle("fast");
+
+                var page =$(this).attr("page");
+                if(page != ""){
+                    load_markdown_url(page);
+                    $("#main_title").text($(this).find("span.node_text").first().text());
+                }
+                
+            });
+
+        });
+
+        
+    }
+
+
+</script>
+</html>
