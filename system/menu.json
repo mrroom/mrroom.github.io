@@ -1,5 +1,6 @@
 [
     {"code":"menu01", "text":"HOME", "order":"1","is_admin":"N", "url":"/"},
     {"code":"menu02", "text":"YMS", "order":"2","is_admin":"N", "url":"/yms/"},
-    {"code":"menu03", "text":"SPC", "order":"3","is_admin":"N", "url":"/spc/"}
+    {"code":"menu03", "text":"SPC", "order":"3","is_admin":"N", "url":"/spc/"},
+    {"code":"menu03", "text":"여행", "order":"4","is_admin":"N", "url":"/tour/"}
 ]
