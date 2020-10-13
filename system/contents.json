@@ -23,5 +23,7 @@
     {"code":"05-01-02", "parent_code":"05-01", "text":"경사하강법", "page":"https://raw.githubusercontent.com/mrroom/Bigdata-Deep-Learning/master/%EA%B2%BD%EC%82%AC%ED%95%98%EA%B0%95%EB%B2%95.md"},
     {"code":"06-01", "parent_code":"06", "text":"AGX XAVIER 설정", "page":"https://raw.githubusercontent.com/mrroom/agx-xavier-config/master/README.md"},
     {"code":"07-01", "parent_code":"07", "text":"전기차", "page":""},
-    {"code":"07-01-01", "parent_code":"07-01", "text":"EV-Line(파워큐브)", "page":"https://raw.githubusercontent.com/mrroom/mrroom.github.io/master/system/ev/ev_line.md"}
+    {"code":"07-01-01", "parent_code":"07-01", "text":"EV-Line(파워큐브)", "page":"https://raw.githubusercontent.com/mrroom/mrroom.github.io/master/system/ev/ev_line.md"},
+    {"code":"07-02", "parent_code":"07", "text":"여행", "page":""},
+    {"code":"07-02-01", "parent_code":"07-02", "text":"목포여행", "page":"https://raw.githubusercontent.com/mrroom/tour/main/mockpo.md"}
 ]
