@@ -25,5 +25,6 @@
     {"code":"07-01", "parent_code":"07", "text":"전기차", "page":""},
     {"code":"07-01-01", "parent_code":"07-01", "text":"EV-Line(파워큐브)", "page":"https://raw.githubusercontent.com/mrroom/mrroom.github.io/master/system/ev/ev_line.md"},
     {"code":"07-02", "parent_code":"07", "text":"여행", "page":""},
-    {"code":"07-02-01", "parent_code":"07-02", "text":"목포여행", "page":"https://raw.githubusercontent.com/mrroom/tour/main/mockpo.md"}
+    {"code":"07-02-01", "parent_code":"07-02", "text":"목포여행", "page":"https://raw.githubusercontent.com/mrroom/tour/main/mockpo.md"},
+    {"code":"07-03", "parent_code":"07", "text":"기타", "page":"https://raw.githubusercontent.com/mrroom/mrroom.github.io/master/system/ev/ev_line.md"}
 ]
