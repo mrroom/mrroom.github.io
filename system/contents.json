@@ -7,7 +7,7 @@
     {"code":"01-01", "parent_code":"01", "text":"MDM, MES, SPC, EES, YMS", "page":"https://raw.githubusercontent.com/mrroom/MDM-MES-SPC-EES-YMS/master/readme.md"},
     {"code":"04-01", "parent_code":"04", "text":"비지니스통계입문(책)", "page":"https://raw.githubusercontent.com/mrroom/Bigdata-Deep-Learning/master/비지니스통계입문.md"},
     {"code":"05-01", "parent_code":"05", "text":"그로킹 딥러닝(책)", "page":""},
-    {"code":"05-02", "parent_code":"05", "text":"Machine Learning with Python(허민석)", "page":""},
+    {"code":"05-02", "parent_code":"05", "text":"머신러닝 교과서 with 파이썬, 사이킷런, 텐서플로", "page":"https://github.com/rickiepark/python-machine-learning-book-2nd-edition"},
     {"code":"05-03", "parent_code":"05", "text":"Tensorflow Study", "page":"https://raw.githubusercontent.com/mrroom/Bigdata-Deep-Learning/master/%ED%85%90%EC%84%9C%ED%94%8C%EB%A1%9C%EC%9A%B02.0.md"},
     {"code":"05-04", "parent_code":"05", "text":"브레인 이미테이션(책)", "page":"https://raw.githubusercontent.com/mrroom/Bigdata-Deep-Learning/master/%EB%B8%8C%EB%A0%88%EC%9D%B8%20%EC%9D%B4%EB%AF%B8%ED%85%8C%EC%9D%B4%EC%85%98.md"},
     {"code":"05-05", "parent_code":"05", "text":"MNIST", "page":"https://raw.githubusercontent.com/mrroom/Bigdata-Deep-Learning/master/mnist.md"},
