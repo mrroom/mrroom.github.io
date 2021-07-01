@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,33 +8,46 @@
     <title>SSTS Test</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
 </head>
+
 <body>
     <h2>SSTS Camera Test</h2>
     <div class="text-center">
-        <button class="btn" id="page1_color_change">색상변경</button>
+        <button id="page1_color_change">색상변경</button>
         <h2 id="page1_color">색상</h2>
+    </div>
+    <div class="text-center">
+        <button id="page1_take_picture">사진촬영</button>
+        <h2 id="page1_picture">사진</h2>
     </div>
 </body>
 <script>
 
-    $(function() {
+    $(function () {
 
-        $("#page1_color_change").click(function(event){
+        $("#page1_color_change").click(function (event) {
 
             console.log("page1_color_change", event);
 
-            $("#page1_color").css({"background-color" : "blue"});
+            $("#page1_color").css({ "background-color": "blue" });
             //앱 채널로 색상변경 보내기
             web_color_change("red");
 
         });
 
-    })
+        $("#page1_take_picture").click(function (event) {
 
-    
+            console.log("page1_take_picture", event);
+
+            take_picture();
+
+        });
+
+    })
 
     //앱 채널로 색상변경 보내기
     function web_color_change(color) {
@@ -42,10 +56,10 @@
 
         console.log("web_color_change : ", color);
 
-        try { 
+        try {
             //앱 함수(JavascriptChannel)
-            color_channel.postMessage(color); 
-        } 
+            color_channel.postMessage(color);
+        }
         catch (err) {
 
         }
@@ -55,11 +69,26 @@
     //앱에서 호출하는 함수
     function app_change_color(color) {
 
-        $("#page1_color").css({"background-color" : color});
+        $("#page1_color").css({ "background-color": color });
 
     }
 
-    
+    //사진찍기
+    function take_picture() {
+
+        console.log("take_picture");
+
+        try {
+            //앱 함수(JavascriptChannel)
+            color_channel.postMessage("take_picture");
+        }
+        catch (err) {
+
+        }
+
+    }
+
 
 </script>
+
 </html>
