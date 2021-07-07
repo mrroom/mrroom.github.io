@@ -27,6 +27,10 @@
     <div class="text-center">
         <img id="base64_image" src="" />
     </div>
+    <div class="text-center">
+        <button id="page1_qr_scan">QR Scan</button>
+        <h2 id="qrcode_value">QR Code</h2>
+    </div>
 </body>
 <script>
 
@@ -47,6 +51,14 @@
             console.log("page1_take_picture", event);
 
             take_picture();
+
+        });
+        
+        $("#page1_qr_scan").click(function (event) {
+
+            console.log("page1_qr_scan", event);
+
+            qrcode_scan();
 
         });
 
@@ -97,6 +109,29 @@
         var image_source = "data:image/jpeg;base64," + base64_image;
         console.log(image_source);
         $("#base64_image").attr("src", image_source);
+
+    }
+    
+    //QR Code Scan
+    function qrcode_scan() {
+
+        console.log("qrcode_scan");
+
+        try {
+            //앱 함수(JavascriptChannel)
+            color_channel.postMessage("qrcode_scan");
+        }
+        catch (err) {
+
+        }
+
+    }
+    
+    //앱에서 호출하는 함수
+    function set_qrcode_value(code_value) {
+
+        console.log(code_value);
+        $("#qrcode_value").text(code_value);
 
     }
 
