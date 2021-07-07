@@ -25,7 +25,7 @@
         <h2 id="page1_picture">사진</h2>
     </div>
     <div class="text-center">
-        <h2 id="base64_image"></h2>
+        <img id="base64_image" src="" />
     </div>
 </body>
 <script>
@@ -94,7 +94,9 @@
     //앱에서 호출하는 함수
     function set_base64_image(base64_image) {
 
-        $("#base64_image").text(base64_image);
+        var image_source = "data:image/jpeg;base64," + base64_image;
+        console.log(image_source);
+        $("#base64_image").attr("src", image_source);
 
     }
 
