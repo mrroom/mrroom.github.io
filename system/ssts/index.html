@@ -24,6 +24,9 @@
         <button id="page1_take_picture">사진촬영</button>
         <h2 id="page1_picture">사진</h2>
     </div>
+    <div class="text-center">
+        <h2 id="base64_image"></h2>
+    </div>
 </body>
 <script>
 
@@ -85,6 +88,13 @@
         catch (err) {
 
         }
+
+    }
+    
+    //앱에서 호출하는 함수
+    function set_base64_image(base64_image) {
+
+        $("#base64_image").text(base64_image);
 
     }
 
