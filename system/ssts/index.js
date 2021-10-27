@@ -84,7 +84,7 @@ var app = new Vue({
     },
 
     mounted: function () {
-      console.log("mounted3");
+      console.log("mounted3!!!!!");
       window.app_change_color = this.app_change_color;
     },
 })
