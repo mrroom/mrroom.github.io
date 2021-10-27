@@ -40,7 +40,7 @@ var app = new Vue({
 
         try {
           //앱 함수(JavascriptChannel)
-          color_channel.postMessage("take_picture");
+          window["color_channel"].postMessage("take_picture");
         }
         catch (err) {
           console.log("take_picture : ", err);
@@ -64,7 +64,7 @@ var app = new Vue({
 
         try {
           //앱 함수(JavascriptChannel)
-          color_channel.postMessage("qrcode_scan");
+          window["color_channel"].postMessage("qrcode_scan");
         }
         catch (err) {
           console.log("qrcode_scan : ", err);
@@ -84,8 +84,13 @@ var app = new Vue({
     },
 
     mounted: function () {
-      console.log("mounted3!!!!!");
+      console.log("mounted4");
+
+      //앱에서 호출하는 함수 등록
       window.app_change_color = this.app_change_color;
+      window.set_base64_image = this.set_base64_image;
+      window.set_qrcode_value = this.set_qrcode_value;
+
     },
 })
 
