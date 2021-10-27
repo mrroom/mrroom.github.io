@@ -1,4 +1,11 @@
 
+//앱에서 호출하는 함수
+function app_change_color(color) {
+
+  this.bg_color = color;
+
+}
+
 var app = new Vue({
     el: "#main",
     data: function () {
@@ -18,7 +25,7 @@ var app = new Vue({
         this.bg_color = "blue";
         console.log("web_color_change : ", this.bg_color);
         try {
-          color_channel.postMessage("red");
+          window["color_channel"].postMessage("red");
         }
         catch (err) {
           console.log("change_color : ", err);
@@ -85,6 +92,7 @@ var app = new Vue({
 
     mounted: function () {
       console.log("mounted");
+      window.app_change_color = this.app_change_color;
     },
 })
 
