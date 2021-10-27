@@ -5,7 +5,8 @@ var app = new Vue({
         return {
           bg_color : "green",
           base64_image : "",
-          qrcode_value : ""
+          qrcode_value : "",
+          err_msg : ""
         }
     },
     methods: {
@@ -15,13 +16,14 @@ var app = new Vue({
 
         console.log("change_color", this.bg_color);
         //앱 채널로 색상변경 보내기
-        this.bg_color = "blue";
-        console.log("web_color_change : ", this.bg_color);
         try {
+          this.bg_color = "blue";
+          console.log("web_color_change : ", this.bg_color);
           window["color_channel"].postMessage("red");
         }
         catch (err) {
           console.log("change_color : ", err);
+          this.err_msg = err;
         }
 
       },
@@ -29,7 +31,13 @@ var app = new Vue({
       //앱에서 호출하는 함수
       app_change_color(color) {
 
-        this.bg_color = color;
+        try {
+          this.bg_color = color;
+        }
+        catch (err) {
+          console.log("app_change_color : ", err);
+          this.err_msg = err;
+        }
 
       },
 
@@ -44,6 +52,7 @@ var app = new Vue({
         }
         catch (err) {
           console.log("take_picture : ", err);
+          this.err_msg = err;
         }
 
       },
@@ -51,9 +60,15 @@ var app = new Vue({
       //앱에서 호출하는 함수
       set_base64_image(base64_string) {
 
-        var image_source = "data:image/jpeg;base64," + base64_string;
-        console.log(image_source);
-        this.base64_image = image_source;
+        try {
+          var image_source = "data:image/jpeg;base64," + base64_string;
+          console.log(image_source);
+          this.base64_image = image_source;
+        }
+        catch (err) {
+          console.log("set_base64_image : ", err);
+          this.err_msg = err;
+        }
 
       },
   
@@ -68,6 +83,7 @@ var app = new Vue({
         }
         catch (err) {
           console.log("qrcode_scan : ", err);
+          this.err_msg = err;
         }
 
       },
@@ -75,8 +91,14 @@ var app = new Vue({
       //앱에서 호출하는 함수
       set_qrcode_value(code_value) {
 
-        console.log(code_value);
-        this.qrcode_value = code_value;
+        try {
+          console.log(code_value);
+          this.qrcode_value = code_value;
+        }
+        catch (err) {
+          console.log("set_qrcode_value : ", err);
+          this.err_msg = err;
+        }
 
       },
 
