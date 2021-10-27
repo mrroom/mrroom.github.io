@@ -1,11 +1,4 @@
 
-//앱에서 호출하는 함수
-function app_change_color(color) {
-
-  this.bg_color = color;
-
-}
-
 var app = new Vue({
     el: "#main",
     data: function () {
@@ -91,7 +84,7 @@ var app = new Vue({
     },
 
     mounted: function () {
-      console.log("mounted2");
+      console.log("mounted3");
       window.app_change_color = this.app_change_color;
     },
 })
