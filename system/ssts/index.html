@@ -7,32 +7,38 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>SSTS Test</title>
         <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue@^2.0.0/dist/vue.min.js"></script>
-        <script type="module" src="index.js"></script>
+        <style>
+            .green {
+                background-color: green;
+            }
+
+            .blue {
+                background-color: blue;
+            }
+        </style>
     </head>
 
     <body>
-        <div id="app">
+        <div id="main">
             <h2>SSTS Camera Test</h2>
-            <div class="text-center">
+            <div>
                 <button @click="change_color">색상변경</button>
-                <h2 :style="{ background-color: background_color }">색상</h2>
+                <h2 :class="bg_color">색상</h2>
             </div>
-            <div class="text-center">
+            <div>
                 <button @click="take_picture">사진촬영</button>
-                <h2 :style="{ background-color: background_color }">사진</h2>
-            </div>
-            <div class="text-center">
                 <img :src="base64_image" />
             </div>
-            <div class="text-center">
+            <div>
                 <button @click="qrcode_scan">QR Scan</button>
                 <h2>{{qrcode_value}}</h2>
             </div>
         </div>
 
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script type="module" src="index.js"></script>
+
     </body>
+    
 
 </html>
