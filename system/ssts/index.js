@@ -91,7 +91,7 @@ var app = new Vue({
     },
 
     mounted: function () {
-      console.log("mounted");
+      console.log("mounted2");
       window.app_change_color = this.app_change_color;
     },
 })
