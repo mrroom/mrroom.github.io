@@ -1,9 +1,9 @@
 
 var app = new Vue({
-    el: "#app",
+    el: "#main",
     data: function () {
         return {
-          background_color : "white",
+          bg_color : "green",
           base64_image : "",
           qrcode_value : ""
         }
@@ -13,13 +13,15 @@ var app = new Vue({
       //칼라 변경 이벤트
       change_color() {
 
+        console.log("change_color", this.bg_color);
         //앱 채널로 색상변경 보내기
-        this.background_color = "blue";
-        console.log("web_color_change : ", this.background_color);
+        this.bg_color = "blue";
+        console.log("web_color_change : ", this.bg_color);
         try {
-            color_channel.postMessage(this.background_color);
+          color_channel.postMessage(this.bg_color);
         }
         catch (err) {
+          console.log("change_color : ", err);
         }
 
       },
@@ -27,7 +29,7 @@ var app = new Vue({
       //앱에서 호출하는 함수
       app_change_color(color) {
 
-          this.background_color = color;
+        this.bg_color = color;
 
       },
 
@@ -37,10 +39,11 @@ var app = new Vue({
         console.log("take_picture");
 
         try {
-            //앱 함수(JavascriptChannel)
-            color_channel.postMessage("take_picture");
+          //앱 함수(JavascriptChannel)
+          color_channel.postMessage("take_picture");
         }
         catch (err) {
+          console.log("take_picture : ", err);
         }
 
       },
@@ -60,10 +63,11 @@ var app = new Vue({
         console.log("qrcode_scan");
 
         try {
-            //앱 함수(JavascriptChannel)
-            color_channel.postMessage("qrcode_scan");
+          //앱 함수(JavascriptChannel)
+          color_channel.postMessage("qrcode_scan");
         }
         catch (err) {
+          console.log("qrcode_scan : ", err);
         }
 
       },
@@ -76,10 +80,11 @@ var app = new Vue({
 
       },
 
+
     },
 
     mounted: function () {
-        
+      console.log("mounted");
     },
 })
 
