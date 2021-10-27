@@ -18,7 +18,7 @@ var app = new Vue({
         this.bg_color = "blue";
         console.log("web_color_change : ", this.bg_color);
         try {
-          color_channel.postMessage(this.bg_color);
+          color_channel.postMessage("red");
         }
         catch (err) {
           console.log("change_color : ", err);
