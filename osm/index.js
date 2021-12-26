@@ -48,13 +48,19 @@ var app = new Vue({
 
             this.geolet = L.geolet({ position: "topleft" });
             this.geolet.addTo(this.map);
+
+            var imgUrl = "https://key0.cc/images/preview/33652_487870f3eebad583c020bbf094d3adc6.png";
+            var icon = L.icon({iconUrl: imgUrl, iconSize: [38, 95], popupAnchor: [0, -40]});
+            this.geolet.marker = L.marker(this.center, {title:"조깅", icon: icon}).addTo(this.map);
+            console.log(10, this.geolet.marker);
             this.map.on("geolet_success", (data) => { 
-                console.log(data);
+                console.log(100,data);
                 this.center = data.latlng;
-                L.marker(this.center).addTo(this.map);
+                //L.marker(this.center).addTo(this.map);
 
                 var latlng = this.geolet.getLatLng();
-                console.log(data);
+                console.log(200,latlng);
+                console.log(300,this.geolet.marker);
             });
 
             // var gps = new L.Control.Gps({
