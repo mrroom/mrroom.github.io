@@ -46,7 +46,7 @@ var app = new Vue({
 
             L.tileLayer(this.url).addTo(this.map);
 
-            this.geolet = L.geolet({ position: "bottomleft" });
+            this.geolet = L.geolet({ position: "topleft" });
             this.geolet.addTo(this.map);
             this.map.on("geolet_success", (data) => { 
                 console.log(data);
