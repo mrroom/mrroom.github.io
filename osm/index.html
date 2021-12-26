@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>VueLeaflet Test</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <!-- vuetify 스타일 참조 링크 -->
+        <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+  
+        <!-- leaflet 스타일 참조 링크 -->
+        <link rel="stylesheet" href="//unpkg.com/leaflet/dist/leaflet.css" />
+        
+        <style>
+            .leaflet-control-attribution {
+                visibility: hidden;
+            }
+
+        </style>
+
+        <!-- vue.js javascript 참조 링크 -->
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <!-- vuetify javascript 참조 링크 -->
+        <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+        <!-- leaflet.js, vue2-leaflet javascript 참조 링크 -->
+        <script src="//unpkg.com/leaflet/dist/leaflet.js"></script>
+        <script src="//unpkg.com/leaflet.marker.slideto@0.2.0/Leaflet.Marker.SlideTo.js"></script>
+        
+        <script src="geolet.js"></script>
+
+        <!-- 우리가 만든 javascript 참조 링크 -->
+        <script type="module" src="index.js"></script>
+    </head>
+
+    <body>
+        <div id="app">
+
+            <v-app>
+
+                <v-app-bar app flat dark>
+                    <v-app-bar-nav-icon></v-app-bar-nav-icon>
+                    <v-app-bar-title>VueLeaflet 테스트</v-app-bar-title>
+                </v-app-bar>
+                <v-main>
+                    <v-container fluid>
+                        <div>
+                            {{subject}}
+                        </div>
+                        <!-- <div style="height: 800px; width: 100%" id="map"></div> -->
+                        <div id="map" style="position:absolute;top:0;right:0;bottom:0;left:0"></div>
+                    </v-container>
+                  </v-main>
+
+            </v-app>
+
+        </div>
+
+    </body>
+
+</html>
