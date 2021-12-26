@@ -18,7 +18,8 @@ var app = new Vue({
             {"title":"경남10버3456","lat_lng":[35.25, 128.66], "icon":"https://leafletjs.com/examples/custom-icons/leaf-red.png"},
             {"title":"경남10버7890","lat_lng":[35.26, 128.66], "icon":"https://leafletjs.com/examples/custom-icons/leaf-orange.png"}
         ],
-        geolet : null
+        geolet : null,
+        cur_location : null
 
     },
 
@@ -124,11 +125,11 @@ var app = new Vue({
         move_marker() {
 
             var marker = this.marker_list[0];
-            
-
+ 
             var interval_id = setInterval(() => {
-                console.log(500,marker._latlng, this.geolet.getLatLng());
-                marker.setLatLng(this.geolet.getLatLng());
+                this.cur_location  = this.geolet.getLatLng();
+                console.log(500,marker._latlng, this.cur_location);
+                marker.setLatLng(this.cur_location);
             }, 1000);
 
         }
