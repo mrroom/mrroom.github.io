@@ -46,13 +46,17 @@ var app = new Vue({
 
             L.tileLayer(this.url).addTo(this.map);
 
+            var icon_svg  = `<svg width="16" height="16" viewport="0 0 16 16" style="margin:auto auto">
+                <circle cx="50" cy="50" r="40" stroke="green" stroke-width="4" fill="yellow" />
+            </svg>`;
+
             this.geolet = L.geolet({ position: "topleft" });
             this.geolet.addTo(this.map);
 
             var imgUrl = "https://key0.cc/images/preview/33652_487870f3eebad583c020bbf094d3adc6.png";
             var icon = L.icon({iconUrl: imgUrl, iconSize: [38, 95], popupAnchor: [0, -40]});
-            this.geolet.marker = L.marker(this.center, {title:"조깅", icon: icon}).addTo(this.map);
-            console.log(10, this.geolet.marker);
+            //this.geolet.marker = L.marker(this.center, {title:"조깅", icon: icon}).addTo(this.map);
+            //console.log(10, this.geolet.marker.options.icon.options.iconUrl);
             this.map.on("geolet_success", (data) => { 
                 console.log(100,data);
                 this.center = data.latlng;
@@ -60,23 +64,13 @@ var app = new Vue({
 
                 var latlng = this.geolet.getLatLng();
                 console.log(200,latlng);
-                console.log(300,this.geolet.marker);
+
+                this.move_marker();
+                
             });
 
-            // var gps = new L.Control.Gps({
-            //     autoCenter:true
-            // });//inizialize control
-        
-            // gps.on("gps:located", function(e) {
-            //     console.log(e.latlng, map.getCenter())
-            // })
-            // .on("gps:disabled", function(e) {
-            //     e.marker.closePopup()
-            // });
+            this.add_marker();
 
-            // this.map.addControl(gps);
-
-            
             //marker.setLatLng([35.243561635912094, 128.66]);
 
             if (callback) callback();
@@ -130,12 +124,11 @@ var app = new Vue({
         move_marker() {
 
             var marker = this.marker_list[0];
-            var x = marker._latlng.lng;
+            
 
             var interval_id = setInterval(() => {
-                x=x+0.001;
-                marker._latlng.lng = x;
-                marker.setLatLng(marker._latlng);
+                console.log(500,marker._latlng, this.geolet.getLatLng());
+                marker.setLatLng(this.geolet.getLatLng());
             }, 1000);
 
         }
@@ -147,11 +140,12 @@ var app = new Vue({
         //this.get_geo_location(() => {
             this.init_map(()=>{
 
-                L.marker(this.center).addTo(this.map);
+                //L.marker(this.center).addTo(this.map);
                 // this.add_marker(()=>{
                 //     this.move_marker();
                 // });
                 //this.add_move_marker();
+
             });
         //})
         
