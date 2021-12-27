@@ -6,63 +6,37 @@ var app = new Vue({
 
     //ViewModel 변수 선언
     data: {
-        subject: "VueLeaflet 테스트",  //제목
         map: null,
-        center: [35.243561635912094, 128.65269455210196], //[51.505, -0.159],
+        center: [35.228197115830504, 128.68184648445157], 
         zoom: 13,
         url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
         attribution:"&copy; <a target='_blank' href='http://osm.org/copyright'>OpenStreetMap</a> contributor",
         marker_list:[],
         marker_info_list:[
-            {"title":"경남10버1234","lat_lng":[35.24, 128.66], "icon":"https://leafletjs.com/examples/custom-icons/leaf-green.png"},
-            {"title":"경남10버3456","lat_lng":[35.25, 128.66], "icon":"https://leafletjs.com/examples/custom-icons/leaf-red.png"},
-            {"title":"경남10버7890","lat_lng":[35.26, 128.66], "icon":"https://leafletjs.com/examples/custom-icons/leaf-orange.png"}
+            {"title":"스마트업","lat_lng":[35.241234831695905, 128.6315400976197], "icon":"https://cdn-icons-png.flaticon.com/512/2593/2593478.png"},
+            {"title":"창원시청","lat_lng":[35.228197115830504, 128.68184648445157], "icon":"https://cdn-icons-png.flaticon.com/512/2593/2593478.png"},
+            {"title":"트럭","lat_lng":[35.241234831695905, 128.6315400976197], "icon":"https://cdn-icons-png.flaticon.com/512/819/819489.png"},
         ],
         geolet : null,
-        cur_location : null
+        title : null
 
     },
 
     //이벤트 또는 함수 선언
     methods: {
-
-        get_geo_location(callback) {
-
-            if(navigator.geolocation){
-                navigator.geolocation.getCurrentPosition(position => {
-                    console.log(position.coords);
-                    //latitude: 35.1583935, longitude: 128.7053831
-                    this.center = [position.coords.latitude, position.coords.longitude];
-
-                    if (callback) callback();
-                })
-            }
-
-        },
         
         init_map(callback) {
             this.map = L.map("map").setView(this.center, this.zoom);
-            //this.map = L.map("map").fitWorld();
-            //this.map.locate({setView: true, maxZoom: 16});
 
             L.tileLayer(this.url).addTo(this.map);
 
-            var icon_svg  = `<svg width="16" height="16" viewport="0 0 16 16" style="margin:auto auto">
-                <circle cx="50" cy="50" r="40" stroke="green" stroke-width="4" fill="yellow" />
-            </svg>`;
-
-            this.geolet = L.geolet({ position: "topleft" });
+            this.geolet = L.geolet({ position: "topleft", marker:false });
             this.geolet.addTo(this.map);
 
-            var imgUrl = "https://key0.cc/images/preview/33652_487870f3eebad583c020bbf094d3adc6.png";
-            var icon = L.icon({iconUrl: imgUrl, iconSize: [38, 95], popupAnchor: [0, -40]});
-            //this.geolet.marker = L.marker(this.center, {title:"조깅", icon: icon}).addTo(this.map);
-            //console.log(10, this.geolet.marker.options.icon.options.iconUrl);
             this.map.on("geolet_success", (data) => { 
                 console.log(100,data);
                 this.center = data.latlng;
-                //L.marker(this.center).addTo(this.map);
-
+                
                 var latlng = this.geolet.getLatLng();
                 console.log(200,latlng);
 
@@ -71,8 +45,6 @@ var app = new Vue({
             });
 
             this.add_marker();
-
-            //marker.setLatLng([35.243561635912094, 128.66]);
 
             if (callback) callback();
 
@@ -84,7 +56,7 @@ var app = new Vue({
 
                 var icon = L.icon({
                     iconUrl: marker_info.icon,
-                    iconSize:     [38, 95], 
+                    iconSize:     [48, 48], 
                     popupAnchor:  [0, -40] 
                 });
 
@@ -96,40 +68,16 @@ var app = new Vue({
             if (callback) callback();
 
         },
-        
-        add_move_marker() {
-            // var moving_marker = L.marker.movingMarker([[35.243561635912094, 128.65269455210196],[35.243561635912094, 129]],
-            //     [20000]).addTo(this.map);
 
-            // moving_marker.start();
-
-            var marker = L.marker([35.243561635912094, 128.65269455210196]).addTo(this.map);;
-
-            marker.slideTo(	[35.243561635912094, 129], {
-                duration: 20000,
-                keepAtCenter: true
-            });
-
-        },
-
-        move_marker1() {
-
-            var interval_id = setInterval(() => {
-                x=x+0.01;
-                this.marker_lat_lng[1] = x;
-                console.log(this.marker_lat_lng);
-            }, 1000);
-
-        },
 
         move_marker() {
 
-            var marker = this.marker_list[0];
+            var marker = this.marker_list[2];
  
             var interval_id = setInterval(() => {
-                this.cur_location  = this.geolet.getLatLng();
-                console.log(500,marker._latlng, this.cur_location);
-                marker.setLatLng(this.cur_location);
+                this.title  = this.geolet.getLatLng();
+                console.log(500,marker._latlng, this.title);
+                marker.setLatLng(this.geolet.getLatLng());
             }, 1000);
 
         }
@@ -138,19 +86,7 @@ var app = new Vue({
 
     mounted() { 
 
-        //this.get_geo_location(() => {
-            this.init_map(()=>{
-
-                //L.marker(this.center).addTo(this.map);
-                // this.add_marker(()=>{
-                //     this.move_marker();
-                // });
-                //this.add_move_marker();
-
-            });
-        //})
-        
-        
+        this.init_map();
     },
 
 });
