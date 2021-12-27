@@ -86,6 +86,18 @@ var app = new Vue({
 
     mounted() { 
 
+        if(!("geolocation" in navigator)) {
+            this.title = "Geolocation is not available.";
+            return;
+        }
+
+        // get position
+        navigator.geolocation.getCurrentPosition(pos => {
+            this.title = pos;
+        }, err => {
+            this.title = err.message;
+        });
+        
         this.init_map();
     },
 
