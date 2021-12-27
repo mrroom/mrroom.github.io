@@ -19,6 +19,11 @@
             .leaflet-control-attribution {
                 visibility: hidden;
             }
+            .v-app-bar-title__content, .v-app-bar-title__placeholder {
+                overflow: visible;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
 
         </style>
 
@@ -45,10 +50,9 @@
         <div id="app">
 
             <v-app>
-
                 <v-app-bar app flat dark>
                     <v-app-bar-nav-icon></v-app-bar-nav-icon>
-                    <v-app-bar-title>{{title}}</v-app-bar-title>
+                    <v-app-bar-title>{{title}} [{{latitude}},{{longitude}}]</v-app-bar-title>
                 </v-app-bar>
                 <v-main>
                     <v-container fluid>
