@@ -12,6 +12,8 @@
   
         <!-- leaflet 스타일 참조 링크 -->
         <link rel="stylesheet" href="//unpkg.com/leaflet/dist/leaflet.css" />
+        <!-- <link rel="stylesheet" href="./leaflet-gps.src.css" /> -->
+        <!-- <link rel="stylesheet" href="//unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" /> -->
         
         <style>
             .leaflet-control-attribution {
@@ -29,7 +31,10 @@
         <!-- leaflet.js, vue2-leaflet javascript 참조 링크 -->
         <script src="//unpkg.com/leaflet/dist/leaflet.js"></script>
         <script src="//unpkg.com/leaflet.marker.slideto@0.2.0/Leaflet.Marker.SlideTo.js"></script>
-        
+        <!-- <script src="//unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script> -->
+        <!-- <script src="https://cdn.jsdelivr.net/npm/leaflet-gps@1.7.8/dist/leaflet-gps.src.min.js"></script>
+         -->
+        <!-- <script src="./leaflet-gps.src.js"></script> -->
         <script src="geolet.js"></script>
 
         <!-- 우리가 만든 javascript 참조 링크 -->
@@ -43,15 +48,11 @@
 
                 <v-app-bar app flat dark>
                     <v-app-bar-nav-icon></v-app-bar-nav-icon>
-                    <v-app-bar-title>VueLeaflet 테스트</v-app-bar-title>
+                    <v-app-bar-title>{{title}}</v-app-bar-title>
                 </v-app-bar>
                 <v-main>
                     <v-container fluid>
-                        <div>
-                            {{subject}}
-                        </div>
-                        <!-- <div style="height: 800px; width: 100%" id="map"></div> -->
-                        <div id="map" style="position:absolute;top:0;right:0;bottom:0;left:0"></div>
+                        <div style="height: 800px; width: 100%" id="map"></div>
                     </v-container>
                   </v-main>
 
