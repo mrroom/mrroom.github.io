@@ -9,7 +9,7 @@ var app = new Vue({
         latitude: null,
         longitude: null,
         map: null,
-        center: [35.228197115830504, 128.68184648445157], 
+        center: [35.228197115830504, 128.68184648445157], //창원시청
         zoom: 13,
         url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
         attribution:"&copy; <a target='_blank' href='http://osm.org/copyright'>OpenStreetMap</a> contributor",
@@ -28,23 +28,9 @@ var app = new Vue({
     methods: {
         
         init_map(callback) {
+
             this.map = L.map("map").setView(this.center, this.zoom);
-
             L.tileLayer(this.url).addTo(this.map);
-
-            this.geolet = L.geolet({ position: "topleft", marker:false });
-            this.geolet.addTo(this.map);
-
-            this.map.on("geolet_success", (data) => { 
-                console.log(100,data);
-                this.center = data.latlng;
-                
-                var latlng = this.geolet.getLatLng();
-                console.log(200,latlng);
-
-                //this.move_marker();
-                
-            });
 
             this.add_marker();
 
@@ -71,75 +57,28 @@ var app = new Vue({
 
         },
 
+        set_location(latitude, longitude) {
 
-        move_marker() {
-
+            this.title = "Location : ";
+            this.latitude = latitude;
+            this.longitude = longitude;
+            
             var marker = this.marker_list[2];
  
-            var interval_id = setInterval(() => {
-                if(this.geolet._latLng != null) {
-                    console.log(500,marker._latlng);
-                    marker.setLatLng(this.geolet.getLatLng());
-                }
-                else{
-                    console.log("clearInterval");
-                    clearInterval(interval_id);
-                }
-                
-            }, 1000);
-
-        },
-
-        watch_postion() {
-            if (navigator.geolocation) {
-                navigator.geolocation.watchPosition(
-                    this.successPosition,
-                    this.failurePosition, 
-                    {
-                        enableHighAccuracy: false,
-                        timeout:1000,
-                        maximumAge: 4000
-                    }
-                );
-            }else{
-                this.title = "Watch_postion : Your browser does not support Geolocation API!!!";
-            }
-        },
-
-        successPosition(position) {
-            this.title = "watch_postion";
-            this.latitude = position.coords.latitude;
-            this.longitude = position.coords.longitude;
-
-            var marker = this.marker_list[2];
             var latLng = new L.LatLng(this.latitude, this.longitude);
             marker.setLatLng(latLng);
-        },
 
-        failurePosition(err) {
-            this.title = err.message;
         },
 
     },
 
     mounted() { 
 
-        if(!("geolocation" in navigator)) {
-            this.title = "Your browser does not support Geolocation API!!!";
-            return;
-        }
-
-        // get position
-        navigator.geolocation.getCurrentPosition(position => {
-            this.title = "getCurrentPosition";
-            this.latitude = position.coords.latitude;
-            this.longitude = position.coords.longitude;
-        }, err => {
-            this.title = err.message;
-        });
+        //앱에서 호출하는 함수 등록
+        window.set_location = this.set_location;
 
         this.init_map(()=> {
-            this.watch_postion();
+            
         });
         
     },
