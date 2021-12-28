@@ -9,15 +9,15 @@ var app = new Vue({
         latitude: null,
         longitude: null,
         map: null,
-        center: [35.228197115830504, 128.68184648445157], //창원시청
+        center: [37.503609284204096, 127.047012169130437], //창원시청
         zoom: 13,
         url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
         attribution:"&copy; <a target='_blank' href='http://osm.org/copyright'>OpenStreetMap</a> contributor",
         marker_list:[],
         marker_info_list:[
-            {"title":"스마트업","lat_lng":[35.241234831695905, 128.6315400976197], "icon":"https://cdn-icons-png.flaticon.com/512/2593/2593478.png"},
-            {"title":"창원시청","lat_lng":[35.228197115830504, 128.68184648445157], "icon":"https://cdn-icons-png.flaticon.com/512/2593/2593478.png"},
-            {"title":"트럭","lat_lng":[35.241234831695905, 128.6315400976197], "icon":"https://cdn-icons-png.flaticon.com/512/819/819489.png"},
+            {"title":"모비어스앤밸류체인(주)","lat_lng":[37.503609284204096, 127.047012169130437], "icon":"https://cdn-icons-png.flaticon.com/512/2593/2593478.png"},
+            {"title":"신성통상(주)","lat_lng":[37.5318702343292, 127.14038651330682], "icon":"https://cdn-icons-png.flaticon.com/512/2593/2593478.png"},
+            {"title":"트럭","lat_lng":[37.50467319490107, 127.04901846152671], "icon":"https://cdn-icons-png.flaticon.com/512/819/819489.png"},
         ],
         geolet : null,
         title : null
