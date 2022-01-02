@@ -9,7 +9,7 @@ var app = new Vue({
         latitude: null,
         longitude: null,
         map: null,
-        center: [37.503609284204096, 127.047012169130437], //창원시청
+        center: [37.503609284204096, 127.047012169130437], //모비어스앤밸류체인(주)
         zoom: 13,
         url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
         attribution:"&copy; <a target='_blank' href='http://osm.org/copyright'>OpenStreetMap</a> contributor",
